@@ -6,6 +6,7 @@ import 'package:ola_mundo/Stores/listar_store.dart';
 import 'package:ola_mundo/views/mostrar_arq.dart';
 import 'package:ola_mundo/views/timer_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ola_mundo/utils/theme_app.dart';
 import 'package:intl/intl.dart';
 
 class ListarPag extends StatefulWidget {
@@ -17,6 +18,7 @@ class _ListarPagState extends State<ListarPag> {
   final ListarBolsistaStore store = ListarBolsistaStore();
   final Atualizarstore atualizarStore = Atualizarstore();
   final DeleteStore deleteStore = DeleteStore();
+  ThemeApp themeApp = ThemeApp();
 
   @override
   void initState() {
@@ -96,17 +98,17 @@ class _ListarPagState extends State<ListarPag> {
               final bolsista = store.bolsistas[index];
               return Card(
                 elevation: 6,
-                shadowColor: const Color.fromARGB(255, 255, 136, 0),
+                shadowColor: themeApp.borderColor,
                 margin: EdgeInsets.all(10),
                 child: ExpansionTile(
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                        iconSize: 28,
+                        iconSize: 36,
                         icon: Icon(
                           Icons.edit,
-                          color: Color.fromARGB(255, 80, 221, 118), 
+                          color: themeApp.editIconColor,
                         ),
                         onPressed: () {
                           Navigator.pushNamed(
@@ -119,10 +121,10 @@ class _ListarPagState extends State<ListarPag> {
                       ),
                       
                       IconButton(
-                        iconSize: 28,
+                        iconSize: 36,
                         icon: Icon(
                           Icons.timer,
-                          color: Color.fromARGB(255, 50, 163, 255),
+                          color: themeApp.appBarTimerPageColor,
                         ),
                         onPressed: () {
                           Navigator.of(context).push(
@@ -135,10 +137,10 @@ class _ListarPagState extends State<ListarPag> {
                         },
                       ),
                       IconButton(
-                        iconSize: 28,
+                        iconSize: 36,
                         icon: Icon(
                           Icons.delete,
-                          color: Color.fromARGB(255, 255, 88, 50),
+                          color: themeApp.deleteIconColor,
                         ),
                         onPressed: () async {
                           showDialog(
@@ -146,16 +148,33 @@ class _ListarPagState extends State<ListarPag> {
                             barrierDismissible: false,
                             builder:
                                 (context) => AlertDialog(
-                                  title: Text('Confirmar Exclusão'),
+                                  title: Text('Confirme a Exclusão:',
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w700,
+                                    color: themeApp.textColor,
+                                  ),
+                                  ),
                                   content: Text(
-                                    'Deseja realmente excluir o bolsista ${bolsista.nome}?',
+                                    'Deseja excluir: ${bolsista.nome}?',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color: themeApp.textColor,
+                                    ),
                                   ),
                                   actions: [
                                     TextButton(
                                       onPressed: () async {
                                         Navigator.of(context).pop();
                                       },
-                                      child: Text('Cancelar'),
+                                      child: Text('Cancelar',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: themeApp.declineColor,
+                                      ),
+                                      ),
                                     ),
 
                                     TextButton(
@@ -170,7 +189,7 @@ class _ListarPagState extends State<ListarPag> {
                                                 child:
                                                     CircularProgressIndicator(
                                                       color:
-                                                          const Color.fromARGB(255, 18, 255, 14),
+                                                          themeApp.deleteIconColor,
                                                     ),
                                               ),
                                         );
@@ -189,23 +208,13 @@ class _ListarPagState extends State<ListarPag> {
                                                 "Bolsista Excluído com sucesso!",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  color: const Color.fromARGB(
-                                                    255,
-                                                    232,
-                                                    232,
-                                                    232,
-                                                  ),
+                                                  color: themeApp.textColor2,
                                                   fontSize: 16,
                                                   fontFamily: 'Roboto',
                                                 ),
                                               ),
                                               backgroundColor:
-                                                  const Color.fromARGB(
-                                                    255,
-                                                    93,
-                                                    216,
-                                                    97,
-                                                  ),
+                                                  themeApp.backSnackSucessColor,
                                               behavior:
                                                   SnackBarBehavior.floating,
                                               shape: RoundedRectangleBorder(
@@ -228,23 +237,13 @@ class _ListarPagState extends State<ListarPag> {
                                               content: Text(
                                                 "Erro ao deletar o bolsista: ${deleteStore.erroMsg}",
                                                 style: TextStyle(
-                                                  color: const Color.fromARGB(
-                                                    255,
-                                                    232,
-                                                    232,
-                                                    232,
-                                                  ),
+                                                  color: themeApp.textColor2,
                                                   fontSize: 16,
                                                   fontFamily: 'Roboto',
                                                 ),
                                               ),
                                               backgroundColor:
-                                                  const Color.fromARGB(
-                                                    255,
-                                                    228,
-                                                    69,
-                                                    66,
-                                                  ),
+                                                  themeApp.backSnackfailColor,
                                               behavior:
                                                   SnackBarBehavior.floating,
                                               shape: RoundedRectangleBorder(
@@ -260,7 +259,13 @@ class _ListarPagState extends State<ListarPag> {
                                           );
                                         }
                                       },
-                                      child: Text('Confirmar'),
+                                      child: Text('Confirmar',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: themeApp.acceptColor,
+                                      ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -289,7 +294,7 @@ class _ListarPagState extends State<ListarPag> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                     side: BorderSide(
-                      color: Color.fromARGB(255, 255, 170, 1),
+                      color: themeApp.borderColor,
                       width: 2,
                     ),
                   ),
@@ -320,7 +325,7 @@ class _ListarPagState extends State<ListarPag> {
                         iconSize: 34,
                         icon: Icon(
                           Icons.picture_as_pdf_rounded,
-                          color: Color.fromARGB(255, 255, 65, 65),
+                          color: themeApp.buttonPdfTextColor,
                         ),
                         onPressed: () {
                           Navigator.push(
@@ -348,23 +353,3 @@ class _ListarPagState extends State<ListarPag> {
     );
   }
 }
-
-/*                     IconButton(
-                        iconSize: 28,
-                        icon: Icon(
-                          Icons.picture_as_pdf_rounded,
-                          color: Color.fromARGB(255, 255, 17, 17),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (_) => MostrarComprovante(
-                                    bolsistaId: bolsista.id!,
-                                  ),
-                            ),
-                          );
-                        },
-                      ),
-                      */

@@ -28,6 +28,12 @@ abstract class _ThemeApp with Store {
   @observable
   Color textColor2 = Color.fromARGB(255, 255, 255, 255);
 
+  @observable
+  Color acceptColor = Color.fromARGB(255, 0, 216, 0);
+
+  @observable
+  Color declineColor = Color.fromARGB(255, 216, 22, 0);
+
   //atualizar //
 
   @observable
@@ -35,6 +41,9 @@ abstract class _ThemeApp with Store {
 
   @observable
   Color atualizarAppBarColor = Color.fromARGB(255, 67, 200, 0);
+
+  @observable
+  Color editIconColor = Color.fromARGB(255, 80, 221, 118);
 
   @observable
   Color atualizarBorderColor = Color.fromARGB(255, 0, 255, 30);
@@ -63,6 +72,15 @@ abstract class _ThemeApp with Store {
 
   @observable
   Color buttonPdfTextColor = Color.fromARGB(255, 255, 48, 25);
+
+  @observable
+  Color deleteIconColor = Color.fromARGB(255, 255, 88, 50);
+
+  @observable
+  Color backSnackSucessColor = Color.fromARGB(255, 93, 216, 97);
+
+  @observable
+  Color backSnackfailColor = Color.fromARGB(255, 228, 69, 66);
 
   @observable
   Color appbarArqColor =Color.fromARGB(255, 212, 21, 0);
@@ -110,6 +128,36 @@ abstract class _ThemeApp with Store {
   @action
   void setTextColor2(Color color) {
     textColor2 = color;
+  }
+
+  @action
+  void setAcceptColor(Color color) {
+    acceptColor = color;
+  }
+
+  @action
+  void setEditIconColor(Color color) {
+    editIconColor = color;
+  }
+
+  @action
+  void setDeclineColor(Color color) {
+    declineColor = color;
+  }
+
+  @action
+  void setDeleteIconColor(Color color) {
+    deleteIconColor = color;
+  }
+
+  @action
+  void setBackSnackSucessColor(Color color) {
+    backSnackSucessColor = color;
+  }
+
+  @action
+  void setBackSnackFailColor(Color color) {
+    backSnackfailColor = color;
   }
 
   @action

@@ -33,7 +33,7 @@ class _MostrarComprovanteState extends State<MostrarComprovante> {
   Future<void> pegarComprovante() async {
     try {
       await limparCacheTemp();
-      
+
       final comprovanteUrl = await ApiService().pegarComprovantePorId(widget.bolsistaId);
       final url = 'http://10.0.2.2:3000$comprovanteUrl';
       final response = await http.get(Uri.parse(url));
@@ -43,7 +43,7 @@ class _MostrarComprovanteState extends State<MostrarComprovante> {
         final bytes = response.bodyBytes;
         final dir = await getTemporaryDirectory();
         final fileExten = comprovanteUrl.split('.').last;
-        final fileName = 'temp.$fileExten';
+        final fileName = 'temp_${widget.bolsistaId}_${DateTime.now().millisecondsSinceEpoch}.$fileExten';
         final file = File('${dir.path}/$fileName');
 
         await file.writeAsBytes(bytes, flush: true);
@@ -70,6 +70,7 @@ class _MostrarComprovanteState extends State<MostrarComprovante> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey('comprovante_${widget.bolsistaId}'),
       appBar: AppBar(title: Text('Exibir Comprovante',
       style: GoogleFonts.inter(
             fontSize: MediaQuery.of(context).size.width * 0.05,
