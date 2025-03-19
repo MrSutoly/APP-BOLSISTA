@@ -24,7 +24,21 @@ router.put('/:id', upload.single('file'), async (req, res) => {
     ? req.body.data_nascimento.split('T')[0] 
     : currentBolsista[0].data_nascimento;
     const curso = req.body.curso || currentBolsista[0].curso;
-    let comprovante = req.file ? req.file.filename : currentBolsista[0].comprovante;
+    let comprovante = currentBolsista[0].comprovante;
+    if(req.file){
+      if(comprovante){
+        const antigoCompro = path.join(process.cwd(), 'uploads', comprovante);
+        if(fs.existsSync(antigoCompro)){
+          try{ 
+          fs.unlinkSync(antigoCompro);
+          console.log('Arquivo antigo removido:', antigoCompro);
+        }catch(e){
+          console.error('Erro ao remover arquivo:', e);
+        }
+        }
+      }
+      comprovante = req.file.filename;
+    }
 
     console.log('Valores a serem atualizados:', {
       nome_completo,

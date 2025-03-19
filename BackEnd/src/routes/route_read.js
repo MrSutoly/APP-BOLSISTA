@@ -19,10 +19,9 @@ router.get('/:id', async (req, res) => {
     if (rows.length === 0) return res.status(404).json({ error: "Bolsista não encontrado" });
     res.json(rows[0]);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({error: error.message });
   }
 });
-
 
 router.get('/:id/comprovante', async (req, res) => {
   try {

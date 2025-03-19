@@ -4,6 +4,7 @@ import 'package:ola_mundo/Stores/atualizar_store.dart';
 import 'package:ola_mundo/views/mostrar_arq.dart';
 import 'package:ola_mundo/utils/file_picker_util.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ola_mundo/utils/theme_app.dart';
 
 class AtualizarPag extends StatefulWidget {
   final int bolsistaId;
@@ -16,6 +17,7 @@ class AtualizarPag extends StatefulWidget {
 
 class _AtualizarPagState extends State<AtualizarPag> {
   late Atualizarstore store;
+  ThemeApp themeApp = ThemeApp();
 
   Future<void> _selecionarArq() async{
     String? filepath = await selecionarArq();
@@ -25,7 +27,6 @@ class _AtualizarPagState extends State<AtualizarPag> {
       store.erroMsg = 'Erro ao selecionar arquivo';
     }
   }
-
 
   @override
   void initState() {
@@ -37,17 +38,17 @@ class _AtualizarPagState extends State<AtualizarPag> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 215, 255, 197),
+      backgroundColor: themeApp.atualizarBackgroundpage,
       appBar: AppBar(
         title: Text(
           'Atualizar Bolsista',
           style: GoogleFonts.inter(
             fontSize: MediaQuery.of(context).size.width * 0.05,
-            color: Colors.white,
+            color: themeApp.textColor2,
             fontWeight: FontWeight.w700,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 67, 200, 0),
+        backgroundColor: themeApp.atualizarAppBarColor,
         centerTitle: true,
       ),
       body: Observer(
@@ -72,18 +73,18 @@ class _AtualizarPagState extends State<AtualizarPag> {
                       decoration: InputDecoration(
                         hintText: "Nome",
                         hintStyle: TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0),
+                          color: themeApp.textColor,
                           fontSize: 17,
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color.fromARGB(255, 0, 255, 30),
+                            color: themeApp.atualizarBorderColor,
                             width: 2,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color.fromARGB(255, 0, 160, 19),
+                            color: themeApp.atualizarBorderFocusedColor,
                             width: 4,
                           ),
                         ),
@@ -104,21 +105,21 @@ class _AtualizarPagState extends State<AtualizarPag> {
 
                     return TextFormField(
                       autofillHints: null, 
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: "Data de Nascimento",
                         labelStyle: TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0),
+                          color: themeApp.textColor,
                           fontSize: 19,
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color.fromARGB(255, 0, 255, 30),
+                            color: themeApp.atualizarBorderColor,
                             width: 2,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color.fromARGB(255, 0, 160, 19),
+                            color: themeApp.atualizarBorderFocusedColor,
                             width: 4,
                           ),
                         ),
@@ -139,13 +140,13 @@ class _AtualizarPagState extends State<AtualizarPag> {
                             return Theme(
                               data: Theme.of(context).copyWith(
                                 colorScheme: ColorScheme.light(
-                                  primary: Color.fromARGB(255, 0, 255, 30),
+                                  primary: themeApp.atualizarBorderColor,
                                   onPrimary: Colors.white,
                                   onSurface: Color.fromARGB(255, 69, 69, 69),
                                 ),
                                 textButtonTheme: TextButtonThemeData(
                                   style: TextButton.styleFrom(
-                                    foregroundColor: Color.fromARGB(255, 0, 160, 19),
+                                    foregroundColor: themeApp.atualizarBorderFocusedColor,
                                   ),
                                 ),
                               ),
@@ -173,18 +174,18 @@ class _AtualizarPagState extends State<AtualizarPag> {
                       decoration: InputDecoration(
                         hintText: "Curso",
                         hintStyle: TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0),
+                          color: themeApp.textColor,
                           fontSize: 17,
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color.fromARGB(255, 0, 255, 30),
+                            color: themeApp.atualizarBorderColor,
                             width: 2,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color.fromARGB(255, 0, 160, 19),
+                            color: themeApp.atualizarBorderFocusedColor,
                             width: 4,
                           ),
                         ),
@@ -231,21 +232,11 @@ class _AtualizarPagState extends State<AtualizarPag> {
                                 }
                                 : null,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(
-                            255,
-                            255,
-                            255,
-                            255,
-                          ),
-                          foregroundColor: const Color.fromARGB(
-                            255,
-                            255,
-                            109,
-                            25,
-                          ),
+                          backgroundColor: themeApp.buttonBackgroundColor,
+                          foregroundColor: themeApp.buttonPdfTextColor,
                           disabledBackgroundColor: Colors.grey[300],
                           disabledForegroundColor: Colors.grey[600],
-                          shadowColor: Color.fromARGB(255, 0, 0, 0),
+                          shadowColor: themeApp.sombraColor,
                           elevation: 4,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25),
@@ -278,8 +269,8 @@ class _AtualizarPagState extends State<AtualizarPag> {
                   (_)=> ElevatedButton(
                   onPressed: _selecionarArq,
                   style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255,255,255,255),
-                        shadowColor: Color.fromARGB(255, 0, 0, 0),
+                        backgroundColor:  themeApp.buttonBackgroundColor,
+                        shadowColor: themeApp.sombraColor,
                         elevation: 4,
                         shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -287,7 +278,7 @@ class _AtualizarPagState extends State<AtualizarPag> {
                   ),
                   child: Text('Selecionar Comprovante',
                   style: TextStyle(
-                  color: const Color.fromARGB(255, 0, 171, 20),
+                  color: themeApp.atualizarTextButtonColor,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                     )
@@ -320,9 +311,9 @@ class _AtualizarPagState extends State<AtualizarPag> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255,255,255,255),
-                          foregroundColor: const Color.fromARGB(255, 0, 171, 20),
-                          shadowColor: Color.fromARGB(255, 0, 0, 0),
+                          backgroundColor: themeApp.buttonBackgroundColor,
+                          foregroundColor: themeApp.atualizarTextButtonColor,
+                          shadowColor: themeApp.sombraColor,
                           elevation: 4,
                           shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6),

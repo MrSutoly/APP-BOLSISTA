@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:ola_mundo/utils/file_picker_util.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ola_mundo/Stores/cadastro_store.dart';
+import 'package:ola_mundo/utils/theme_app.dart';
 
 class CadastroPag extends StatefulWidget {
   const CadastroPag({super.key});
@@ -14,6 +15,7 @@ class CadastroPag extends StatefulWidget {
 class _CadastroPagState extends State<CadastroPag> {
   final CadastroPagStore store = CadastroPagStore();
   final _formKey = GlobalKey<FormState>();
+  final ThemeApp themeApp = ThemeApp();
 
   Future<void> _selecionarArq() async {
     String? filePath = await selecionarArq();
@@ -28,17 +30,17 @@ class _CadastroPagState extends State<CadastroPag> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromARGB(255, 255, 230, 197),
+      backgroundColor: themeApp.cadastroBackColor2,
       appBar: AppBar(
         title:  Text(
           'Cadastro De Bolsista',
           style: GoogleFonts.inter(
             fontSize: MediaQuery.of(context).size.width * 0.05,
-            color: Colors.white,
+            color: themeApp.textColor2,
             fontWeight: FontWeight.w700,
           ),
         ),
-        backgroundColor:  Color.fromARGB(255, 255, 186, 47),
+        backgroundColor:  themeApp.cadastroAppColor1,
         centerTitle: true,
       ),
 
@@ -52,21 +54,21 @@ class _CadastroPagState extends State<CadastroPag> {
                 builder:
                     (_) => TextFormField(
                       autofillHints: null,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                       hintText: "Nome Completo",
                       hintStyle: TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0),
+                        color: themeApp.textColor,
                         fontSize: 17,
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color.fromARGB(255, 255, 186, 47) ,
+                          color: themeApp.cadastroAppColor1,
                           width: 2,
                         ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 170, 0),
+                            color: themeApp.borderColor,
                             width: 4,
                           )
                         )
@@ -88,21 +90,21 @@ class _CadastroPagState extends State<CadastroPag> {
                   
                   return TextFormField(
                     autofillHints: null, 
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: "Data de Nascimento",
                       labelStyle: TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0),
+                        color: themeApp.textColor,
                         fontSize: 19,
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color.fromARGB(255, 255, 186, 47) ,
+                          color: themeApp.cadastroAppColor1,
                           width: 2,
                         ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 170, 0),
+                            color: themeApp. borderColor,
                             width: 4,
                           )
                         ),
@@ -121,14 +123,14 @@ class _CadastroPagState extends State<CadastroPag> {
                             data: Theme.of(context).copyWith(
                               
                               colorScheme: ColorScheme.light(
-                                primary: const Color.fromARGB(255, 255, 186, 47),   
-                                onPrimary: Colors.white,                           
+                                primary: themeApp.cadastroAppColor1,   
+                                onPrimary: themeApp.buttonBackgroundColor,                          
                                 onSurface: Color.fromARGB(255, 69, 69, 69),        
                               ),
                               
                               textButtonTheme: TextButtonThemeData(
                                 style: TextButton.styleFrom(
-                                foregroundColor: const Color.fromARGB(255, 255, 147, 52), 
+                                foregroundColor: themeApp.cadastroAppColor1, 
                                 ),
                               ),
                             ),
@@ -151,21 +153,21 @@ class _CadastroPagState extends State<CadastroPag> {
                 builder:
                     (_) => TextFormField(
                       autofillHints: null, 
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: "Curso",
                         hintStyle: TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0),
+                          color: themeApp.textColor,
                           fontSize: 17,
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 186, 47),
+                            color: themeApp.cadastroAppColor1, 
                             width: 2,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color.fromARGB(255, 255, 170, 0),
+                            color: themeApp.borderColor,
                             width: 4,
                         )
                         )
@@ -195,14 +197,14 @@ class _CadastroPagState extends State<CadastroPag> {
                 builder:
                     (_) =>
                         store.carregando
-                      ? Center(child: CircularProgressIndicator(color: const Color.fromARGB(255, 255, 186, 47),))
+                      ? Center(child: CircularProgressIndicator(color: themeApp.cadastroAppColor1))
 
                       : ElevatedButton(
                         onPressed: _selecionarArq,
 
                         style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255,255,255,255),
-                        shadowColor: Color.fromARGB(255, 0, 0, 0),
+                        backgroundColor: themeApp.buttonBackgroundColor,
+                        shadowColor: themeApp.sombraColor,
                         elevation: 4,
                         shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -211,7 +213,7 @@ class _CadastroPagState extends State<CadastroPag> {
 
                         child: Text("Selecionar Arquivo (PDF OU JPEG)",
                         style: TextStyle(
-                          color: const Color.fromARGB(255, 255, 48, 25),
+                          color: themeApp.buttonPdfTextColor,
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
@@ -246,8 +248,8 @@ class _CadastroPagState extends State<CadastroPag> {
                                 }
                               },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255,255,255,255),
-                        shadowColor: Color.fromARGB(255, 0, 0, 0),
+                        backgroundColor: themeApp.buttonBackgroundColor,
+                        shadowColor: themeApp.sombraColor,
                         elevation: 4,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
@@ -259,7 +261,7 @@ class _CadastroPagState extends State<CadastroPag> {
                               : Text(
                                 "Cadastrar-Se",
                                 style: TextStyle(
-                                  color: const Color.fromARGB(255,255,147,52),
+                                  color: themeApp.cadastrobuttonColor,
                                   fontSize: 19,
                                   fontWeight: FontWeight.bold,
                                 ),

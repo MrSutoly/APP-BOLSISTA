@@ -20,7 +20,6 @@ class TimerStore = _TimerStore with _$TimerStore;
       @observable
       int vezesPausado = 0;
 
-
       @computed
       String get tempoFormatado{
         final minutos = segundos ~/ 60;	
@@ -37,8 +36,7 @@ class TimerStore = _TimerStore with _$TimerStore;
 
         _timer = Timer.periodic(Duration(seconds:1), (_){
 
-          segundos++;
-          
+        segundos++;
         }
         );
       }

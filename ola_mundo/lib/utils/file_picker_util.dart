@@ -4,7 +4,7 @@ Future<String?> selecionarArq() async {
     try {
       FilePickerResult? resultado = await FilePicker.platform.pickFiles(
         type: FileType.custom,
-        allowedExtensions: ['pdf', 'jpeg', 'jpg'],
+        allowedExtensions: ['pdf', 'jpeg'],
       );
       
       if (resultado != null && resultado.files.isNotEmpty && resultado.files.single.path != null) {
@@ -12,7 +12,7 @@ Future<String?> selecionarArq() async {
         
         if (filePath.isNotEmpty) {
           print("Arquivo selecionado: $filePath");
-          return null;
+          return filePath;
         } else {
           print("Caminho do arquivo vazio");
           return null;

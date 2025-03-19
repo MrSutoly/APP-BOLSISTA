@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:ola_mundo/Stores/timer_store.dart';
+import 'package:ola_mundo/utils/theme_app.dart';
 
 class TimerPage extends StatefulWidget {
     final String nomeBolsista;
@@ -13,19 +14,20 @@ class TimerPage extends StatefulWidget {
 
 class _TimerPageState extends State<TimerPage> {
   final TimerStore store = TimerStore();
+  final ThemeApp themeApp = ThemeApp();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 240, 251, 255),
+      backgroundColor: themeApp.backgroundTimerPage,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 50, 163, 255),
+        backgroundColor: themeApp.appBarTimerPageColor,
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'Cronometro',
           style: TextStyle(
             fontSize: 25,
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: themeApp.textColor2,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -40,11 +42,11 @@ class _TimerPageState extends State<TimerPage> {
             margin: EdgeInsets.all(16),
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 50, 163, 255),
+              color: themeApp.appBarTimerPageColor,
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: Color.fromARGB(255, 50, 50, 50),
+                  color: themeApp.sombraColor2,
                   spreadRadius: 1,
                   blurRadius: 5,
                   offset: Offset(0, 2),
@@ -55,18 +57,18 @@ class _TimerPageState extends State<TimerPage> {
               children: [
                 Text(
                   widget.nomeBolsista,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 25,
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: themeApp.textColor2,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(height: 8),
                 Text(
                   'É hora de trabalhar!',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 21,
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: themeApp.textColor2,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -81,9 +83,9 @@ class _TimerPageState extends State<TimerPage> {
               builder:
                   (_) => Text(
                     store.tempoFormatado,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 50,
-                      color: Color.fromARGB(255, 0, 0, 0),
+                      color: themeApp.textColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -100,7 +102,7 @@ class _TimerPageState extends State<TimerPage> {
                     (_) => ElevatedButton(
                       onPressed: store.girando ? store.pausar : store.iniciar,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: store.girando ? Color.fromARGB(255, 154, 0, 80) :  Color.fromARGB(255, 11, 131, 135),
+                        backgroundColor: store.girando ? themeApp.buttonTimerPauseColor :  themeApp.buttonTimerStartColor,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 50,
                           vertical: 20,
@@ -113,7 +115,7 @@ class _TimerPageState extends State<TimerPage> {
                         store.girando ? 'Pausar' : 'Iniciar',
                         style: TextStyle(
                           fontSize: 26,
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          color: themeApp.textColor2,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -133,9 +135,9 @@ class _TimerPageState extends State<TimerPage> {
                 builder:
                     (_) => Text(
                       'INICIADO: ${store.vezesIniciado} ${store.vezesIniciado == 1 ? 'VEZ' : 'VEZES'}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 28,
-                        color: Color.fromARGB(255, 11, 131, 135),
+                        color: themeApp.buttonTimerStartColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -150,9 +152,9 @@ class _TimerPageState extends State<TimerPage> {
                 builder:
                     (_) => Text(
                       'PAUSADO: ${store.vezesPausado} ${store.vezesPausado == 1 ? 'VEZ' : 'VEZES'}',
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontSize: 28,
-                        color: Color.fromARGB(255, 154, 0, 80),
+                        color: themeApp.buttonTimerPauseColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

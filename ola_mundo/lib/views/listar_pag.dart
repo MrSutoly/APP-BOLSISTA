@@ -26,11 +26,6 @@ class _ListarPagState extends State<ListarPag> {
     });
   }
   
-   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-      store.pegarBolsistas(); 
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +114,7 @@ class _ListarPagState extends State<ListarPag> {
                           '/atualizar',
                           arguments: {'id': bolsista.id},
                         );
+                        store.pegarBolsistas();
                         },
                       ),
                       
@@ -223,6 +219,7 @@ class _ListarPagState extends State<ListarPag> {
                                               duration: Duration(seconds: 5),
                                             ),
                                           );
+                                          store.pegarBolsistas();
                                         } else {
                                           ScaffoldMessenger.of(
                                             context,

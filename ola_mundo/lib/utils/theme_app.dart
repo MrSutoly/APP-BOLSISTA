@@ -6,6 +6,8 @@ class ThemeApp = _ThemeApp with _$ThemeApp;
 
 abstract class _ThemeApp with Store {
 
+  // Cadastro //
+
   @observable
   Color cadastroAppColor1 = Color.fromARGB(255, 255, 186, 47);
 
@@ -13,10 +15,20 @@ abstract class _ThemeApp with Store {
   Color cadastroBackColor2 = Color.fromARGB(255, 255, 230, 197);
 
   @observable
+  Color borderColor = Color.fromARGB(255, 255, 170, 0);
+
+  @observable
+  Color cadastrobuttonColor = Color.fromARGB(255,255,147,52);
+
+  //textos//
+
+  @observable
   Color textColor = Color.fromARGB(255, 0, 0, 0);
 
   @observable
-  Color backgroundTimerPage = Color.fromARGB(255, 240, 251, 255);
+  Color textColor2 = Color.fromARGB(255, 255, 255, 255);
+
+  //atualizar //
 
   @observable
   Color atualizarBackgroundpage = Color.fromARGB(255, 215, 255, 197);
@@ -33,6 +45,11 @@ abstract class _ThemeApp with Store {
   @observable
   Color atualizarTextButtonColor = Color.fromARGB(255, 0, 171, 20);
   
+  //timer//
+
+  @observable
+  Color backgroundTimerPage = Color.fromARGB(255, 240, 251, 255);
+
   @observable
   Color appBarTimerPageColor = Color.fromARGB(255, 50, 163, 255);
 
@@ -42,14 +59,23 @@ abstract class _ThemeApp with Store {
   @observable
   Color buttonTimerPauseColor = Color.fromARGB(255, 154, 0, 80);
 
+  //attachs//
+
   @observable
   Color buttonPdfTextColor = Color.fromARGB(255, 255, 48, 25);
 
   @observable
-  Color buttonBackgroundColor = Color.fromARGB(255, 255, 255, 255);
+  Color appbarArqColor =Color.fromARGB(255, 212, 21, 0);
 
   @observable
-  Color borderColor = Color.fromARGB(255, 255, 170, 0);
+  Color sombraColor = Color.fromARGB(255, 0, 0, 0);  
+
+  @observable
+  Color sombraColor2 = Color.fromARGB(255, 50, 50, 50); 
+
+  @observable
+  Color buttonBackgroundColor = Color.fromARGB(255, 255, 255, 255);
+
 
   @action
   void setcadastroAppColor1(Color color) {
@@ -60,10 +86,30 @@ abstract class _ThemeApp with Store {
   void setcadastroBackColor2(Color color) {
     cadastroBackColor2 = color;
   }
+  
+  @action
+  void setcadastrobuttonColor(Color color){
+    cadastrobuttonColor = color;
+  }
+
+  @action
+  void setsombraColor(Color color){
+    sombraColor = color;
+  }
+
+  @action
+  void setcombraColor2(Color color){
+    sombraColor2 = color;
+  }
 
   @action
   void setTextColor(Color color) {
     textColor = color;
+  }
+
+  @action
+  void setTextColor2(Color color) {
+    textColor2 = color;
   }
 
   @action
@@ -114,6 +160,11 @@ abstract class _ThemeApp with Store {
   @action
   void setButtonPdfTextColor(Color color) {
     buttonPdfTextColor = color;
+  }
+
+  @action
+  void setappbarArqColor(Color color){
+    appbarArqColor = color;
   }
 
   @action

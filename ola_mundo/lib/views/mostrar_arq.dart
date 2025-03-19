@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import '../Services/api_service.dart';
+import 'package:ola_mundo/utils/theme_app.dart';
+import 'package:ola_mundo/utils/temporario_directory.dart';
 
 class MostrarComprovante extends StatefulWidget {
   final int bolsistaId;
@@ -20,6 +22,7 @@ class _MostrarComprovanteState extends State<MostrarComprovante> {
   bool isLoading = true;
   String? errorMessage;
   String? fileType;
+  ThemeApp themeApp = ThemeApp(); 
 
   @override
   void initState() {
@@ -29,9 +32,12 @@ class _MostrarComprovanteState extends State<MostrarComprovante> {
 
   Future<void> pegarComprovante() async {
     try {
+      await limparCacheTemp();
+      
       final comprovanteUrl = await ApiService().pegarComprovantePorId(widget.bolsistaId);
       final url = 'http://10.0.2.2:3000$comprovanteUrl';
       final response = await http.get(Uri.parse(url));
+      print(response.body);
 
       if (response.statusCode == 200) {
         final bytes = response.bodyBytes;
@@ -44,6 +50,7 @@ class _MostrarComprovanteState extends State<MostrarComprovante> {
 
         setState(() {
           filePath = file.path;
+          fileType = fileExten;
           isLoading = false;
         });
       } else {
@@ -66,19 +73,27 @@ class _MostrarComprovanteState extends State<MostrarComprovante> {
       appBar: AppBar(title: Text('Exibir Comprovante',
       style: GoogleFonts.inter(
             fontSize: MediaQuery.of(context).size.width * 0.05,
-            color: Colors.white,
+            color: themeApp.textColor2,
             fontWeight: FontWeight.w700,
       ),
-      )
+      ),
+      backgroundColor: themeApp.appbarArqColor,
+      centerTitle: true,
       ),
       body: Center(
         child: isLoading
             ? const CircularProgressIndicator()
             : errorMessage != null
-                ? Text(errorMessage!, style: const TextStyle(color: Colors.red))
-                : fileType =='pdf'
-                ?PDFView(filePath: filePath!)
-                :Image.file(File(filePath!)),
+                ? Text(errorMessage!, style:  TextStyle(color: themeApp.appbarArqColor,
+                fontSize: MediaQuery.of(context).size.width * 0.09, fontWeight: FontWeight.w700,
+                ))
+                : fileType == 'pdf'
+                    ? PDFView(filePath: filePath!)
+                    : fileType == 'jpeg'
+                        ? Image.file(File(filePath!))
+                        : Text("Tipo de arquivo não suportado", style: TextStyle(color: themeApp.appbarArqColor,
+                        fontSize: MediaQuery.of(context).size.width * 0.06, fontWeight: FontWeight.w700,
+                        )),
       ),
     );
   }
