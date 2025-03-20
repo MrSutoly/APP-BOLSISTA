@@ -32,10 +32,10 @@ class _ListarPagState extends State<ListarPag> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 230, 197),
+      backgroundColor: themeApp.cadastroBackColor2,
       appBar: AppBar(
         title: Text(
-          'Listagem de Bolsistas',
+          'APP-Bolsista',
           style: GoogleFonts.inter(
             fontSize: MediaQuery.of(context).size.width * 0.05,
             color: Colors.white,
@@ -43,7 +43,7 @@ class _ListarPagState extends State<ListarPag> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 255, 189, 47),
+        backgroundColor: themeApp.cadastroAppColor1,
         leading: GestureDetector(
           onTap: () async {
             await store.pegarBolsistas();
@@ -75,7 +75,7 @@ class _ListarPagState extends State<ListarPag> {
           if (store.carregando) {
             return Center(
               child: CircularProgressIndicator(
-                color: const Color.fromARGB(255, 255, 186, 47),
+                color: themeApp.cadastroAppColor1,
               ),
             );
           }
@@ -84,7 +84,7 @@ class _ListarPagState extends State<ListarPag> {
               child: Text(
                 'Nenhum bolsista encontrado',
                 style: TextStyle(
-                  color: const Color.fromARGB(255, 30, 30, 30),
+                  color: themeApp.textColor,
                   fontSize: 20,
                   fontFamily: 'Roboto',
                 ),
